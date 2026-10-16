@@ -175,6 +175,25 @@ function App() {
     return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (frame) cancelAnimationFrame(frame) }
   }, [])
 
+  useEffect(() => {
+    const scenes = document.querySelectorAll('.parallax-section, .cta-section')
+    const cleanups = []
+    scenes.forEach((scene) => {
+      const move = (event) => {
+        const rect = scene.getBoundingClientRect()
+        const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2
+        const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2
+        scene.style.setProperty('--pointer-x', `${x}`)
+        scene.style.setProperty('--pointer-y', `${y}`)
+      }
+      const leave = () => { scene.style.setProperty('--pointer-x', '0'); scene.style.setProperty('--pointer-y', '0') }
+      scene.addEventListener('pointermove', move)
+      scene.addEventListener('pointerleave', leave)
+      cleanups.push(() => { scene.removeEventListener('pointermove', move); scene.removeEventListener('pointerleave', leave) })
+    })
+    return () => cleanups.forEach((cleanup) => cleanup())
+  }, [])
+
   const handleAnchor = (event, id) => {
     event.preventDefault()
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })

@@ -182,3 +182,24 @@ h1 { max-width: 610px; margin-top: 32px; font-size: clamp(65px, 8.4vw, 122px); l
 @media (prefers-reduced-motion: reduce) { .scroll-progress { transition: none; }.story-section *, .story-section::after { transition: none !important; transform: none !important; clip-path: none !important; } }
 .hero.story-section::before { content: none; }
 .topbar .nav-links, .topbar .login-link { color: var(--ink); mix-blend-mode: normal; }
+
+/* Two signature story beats: reveal the idea, then invite the next move. */
+.parallax-section { --pointer-x: 0; --pointer-y: 0; }
+.parallax-section .parallax-content { transition: transform .18s ease-out; }
+.parallax-section .parallax-word--back { filter: blur(.2px); transform: translate(calc(-50% + var(--pointer-x) * -16px), calc(var(--story-back) + var(--chapter-shift) * -.7 + var(--pointer-y) * -10px)) rotate(-7deg); }
+.parallax-section .parallax-word--front { transform: translate(calc(-50% + var(--pointer-x) * 22px), calc(var(--story-front) + var(--chapter-shift) * .85 + var(--pointer-y) * 15px)) rotate(7deg); }
+.parallax-section .parallax-orb--one { transform: translate(calc(var(--pointer-x) * -24px), calc(var(--story-orb-one) + var(--pointer-y) * -18px + var(--chapter-shift) * .5)); transition: transform .25s ease-out; }
+.parallax-section .parallax-orb--two { transform: translate(calc(var(--pointer-x) * 28px), calc(var(--story-orb-two) + var(--pointer-y) * 22px + var(--chapter-shift) * -.65)); transition: transform .25s ease-out; }
+.parallax-section .parallax-content::before { content: "05 / HUMAN CONTEXT"; display: block; margin-bottom: 18px; color: rgba(16,16,20,.48); font: 10px "IBM Plex Mono", monospace; letter-spacing: .12em; }
+.parallax-section .parallax-content.reveal:not(.is-visible) { transform: translateY(54px) scale(.96); opacity: 0; }
+.parallax-section .parallax-content.reveal.is-visible { transform: translateY(calc(var(--story-front) * -.12 + var(--chapter-drift) * -.35 + var(--pointer-y) * -7px)) scale(1); }
+.cta-section { --pointer-x: 0; --pointer-y: 0; }
+.cta-section::before { content: "10 / YOUR NEXT MOVE"; position: absolute; top: 36px; left: 8vw; color: rgba(255,255,255,.36); font: 10px "IBM Plex Mono", monospace; letter-spacing: .12em; }
+.cta-content.reveal:not(.is-visible) { transform: translateY(75px) scale(.9); opacity: 0; }
+.cta-content.reveal.is-visible { transform: translateY(calc(var(--chapter-shift) * -.18 + var(--pointer-y) * -9px)) scale(1); opacity: 1; }
+.cta-glow { transform: translate(calc(var(--pointer-x) * 42px), calc(var(--pointer-y) * 30px)); transition: transform .35s ease-out; }
+.cta-orbit--one { transform: translate(calc(-50% + var(--pointer-x) * 22px), calc(-50% + var(--pointer-y) * 16px)) rotate(-15deg); transition: transform .35s ease-out; }
+.cta-orbit--two { transform: translate(calc(-50% + var(--pointer-x) * -30px), calc(-50% + var(--pointer-y) * -18px)) rotate(26deg); transition: transform .35s ease-out; }
+.cta-section .cta-content .hero-actions .button { transition: transform .25s ease, box-shadow .25s ease; }
+.cta-section .cta-content .hero-actions .button:hover { transform: translateY(-5px) scale(1.04); box-shadow: 0 16px 34px rgba(216,255,79,.2); }
+@media (prefers-reduced-motion: reduce) { .parallax-section .parallax-word--back, .parallax-section .parallax-word--front, .parallax-section .parallax-orb--one, .parallax-section .parallax-orb--two, .cta-glow, .cta-orbit--one, .cta-orbit--two { transform: none !important; } }

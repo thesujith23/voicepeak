@@ -179,9 +179,9 @@ function App() {
           <div className="hero-glow hero-glow--two" />
           <div className="hero-grid" />
           <div className="hero-copy reveal is-visible">
-            <div className="eyebrow"><span className="eyebrow-dot" /> The voice layer for modern teams</div>
-            <h1>Make every<br /><em>conversation</em> count.</h1>
-            <p className="hero-lede">VoicePeak is the AI voice agent that sounds human, works tirelessly, and moves every conversation forward.</p>
+            <div className="eyebrow"><span className="eyebrow-dot" /> The conversational operating system</div>
+            <h1>Put a voice<br /><em>behind the</em><br />moment.</h1>
+            <p className="hero-lede">VoicePeak turns every incoming conversation into momentum—with a voice that listens, thinks, and knows what to do next.</p>
             <div className="hero-actions"><a className="button button--lime" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>Hear it in action <Icon name="arrow" size={17} /></a><a className="text-link" href="#product" onClick={(event) => handleAnchor(event, '#product')}>Explore the product <Icon name="arrow" size={16} /></a></div>
             <div className="hero-proof"><div className="avatar-stack"><span>AM</span><span>JL</span><span>SK</span><span>+</span></div><span>Trusted by 2,000+ teams building what’s next</span></div>
           </div>
@@ -189,10 +189,10 @@ function App() {
             <div className="demo-orbit demo-orbit--outer" />
             <div className="demo-orbit demo-orbit--inner" />
             <div className="hero-agent-card">
-              <div className="agent-card-top"><div className="live-pill"><span /> Live demo</div><span className="agent-status">VoicePeak / 01</span></div>
+              <div className="agent-card-top"><div className="live-pill"><span /> Live demo</div><span className="agent-status">SIGNAL / 01</span></div>
               <div className="agent-face"><div className="face-aura" /><div className="face-core"><span /><span /><span /></div></div>
-              <div className="agent-signal"><span className="signal-label">Listening for intent</span><VoiceVisualizer compact /></div>
-              <div className="agent-prompt"><span className="prompt-mark">“</span><span>{heroMode === 'listen' ? 'Try asking: “Can you find me a time next week?”' : 'Try saying: “I need to update my delivery address.”'}</span></div>
+              <div className="agent-signal"><span className="signal-label">Reading the room</span><VoiceVisualizer compact /></div>
+              <div className="agent-prompt"><span className="prompt-mark">“</span><span>{heroMode === 'listen' ? 'Try asking: “Can we make this easier?”' : 'Try saying: “I need to update my delivery address.”'}</span></div>
               <div className="agent-controls"><button className={`mode-chip ${heroMode === 'listen' ? 'mode-chip--active' : ''}`} onClick={() => setHeroMode('listen')}><Icon name="mic" size={15} /> Listen</button><button className={`mode-chip ${heroMode === 'act' ? 'mode-chip--active' : ''}`} onClick={() => setHeroMode('act')}><Icon name="bolt" size={15} /> Act</button><button className={`record-button ${isDemoLive ? 'record-button--active' : ''}`} onClick={() => setIsDemoLive(!isDemoLive)} aria-label={isDemoLive ? 'Stop demo' : 'Start demo'}><span /></button></div>
             </div>
             <div className="floating-note floating-note--top"><span className="floating-icon"><Icon name="spark" size={16} /></span><span><strong>Understands intent</strong><small>Even when the words change.</small></span></div>

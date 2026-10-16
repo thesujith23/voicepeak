@@ -203,11 +203,3 @@ h1 { max-width: 610px; margin-top: 32px; font-size: clamp(65px, 8.4vw, 122px); l
 .cta-section .cta-content .hero-actions .button { transition: transform .25s ease, box-shadow .25s ease; }
 .cta-section .cta-content .hero-actions .button:hover { transform: translateY(-5px) scale(1.04); box-shadow: 0 16px 34px rgba(216,255,79,.2); }
 @media (prefers-reduced-motion: reduce) { .parallax-section .parallax-word--back, .parallax-section .parallax-word--front, .parallax-section .parallax-orb--one, .parallax-section .parallax-orb--two, .cta-glow, .cta-orbit--one, .cta-orbit--two { transform: none !important; } }
-
-/* Single-screen story chapters: motion stays inside the frame instead of extending the section. */
-.parallax-section, .cta-section { height: 100svh; min-height: 680px; max-height: 900px; overflow: hidden; }
-.parallax-section .parallax-content, .cta-section .cta-content { max-height: calc(100svh - 110px); }
-@media (max-width: 760px) {
-  .parallax-section, .cta-section { height: auto; min-height: 720px; max-height: none; }
-  .parallax-section .parallax-content, .cta-section .cta-content { max-height: none; }
-}

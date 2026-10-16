@@ -94,6 +94,33 @@ function App() {
     return () => node?.removeEventListener('pointermove', handleMove)
   }, [])
 
+  useEffect(() => {
+    const parallax = document.querySelector('.parallax-section')
+    if (!parallax) return
+    let frame = 0
+    const updateParallax = () => {
+      const rect = parallax.getBoundingClientRect()
+      const viewport = window.innerHeight
+      const progress = Math.max(-1, Math.min(1, (viewport * 0.5 - (rect.top + rect.height * 0.5)) / (viewport + rect.height)))
+      parallax.style.setProperty('--story-back', `${progress * -125}px`)
+      parallax.style.setProperty('--story-front', `${progress * 95}px`)
+      parallax.style.setProperty('--story-orb-one', `${progress * 55}px`)
+      parallax.style.setProperty('--story-orb-two', `${progress * -70}px`)
+      frame = 0
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(updateParallax)
+    }
+    updateParallax()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
+
   const handleAnchor = (event, id) => {
     event.preventDefault()
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })

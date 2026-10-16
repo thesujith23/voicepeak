@@ -92,3 +92,25 @@ h1 em, h2 em { font-family: "Instrument Serif", Georgia, serif; letter-spacing: 
 @keyframes cardFloat { 0%,100% { transform: translate(calc(var(--mouse-x) * 7px), calc(var(--mouse-y) * 7px)) rotate(0deg); } 50% { transform: translate(calc(var(--mouse-x) * 7px), calc(var(--mouse-y) * 7px - 7px)) rotate(.6deg); } }
 @keyframes breathe { 0%,100% { transform: scale(.96); box-shadow: 0 0 80px rgba(216,255,79,.25); } 50% { transform: scale(1.05); box-shadow: 0 0 120px rgba(216,255,79,.48); } }
 @media (max-width: 760px) { .hero { min-height: 900px; padding-top: 130px; }.topbar { color: #f7f7f4; }.nav-links--open { color: var(--ink); }.hero-demo { min-height: 415px; }.hero-agent-card { animation: none; }.parallax-word { font-size: 150px; } }
+
+
+/* Hover depth pass: cards now respond to the pointer with a restrained 3D tilt. */
+.tilt-card { --tilt-x: 0deg; --tilt-y: 0deg; --lift: 0px; transform: perspective(900px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(var(--lift)); transform-style: preserve-3d; transition: transform .18s ease-out, box-shadow .25s ease, background .25s ease; will-change: transform; }
+.tilt-card:hover { transform: perspective(900px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) translateY(var(--lift)); z-index: 4; }
+.tilt-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; opacity: 0; background: linear-gradient(135deg, rgba(255,255,255,.2), transparent 40%); transition: opacity .25s ease; }
+.tilt-card:hover::after { opacity: 1; }
+.feature-card:hover, .case-card:hover, .price-card:hover { box-shadow: 18px 24px 45px rgba(16,16,20,.16); }
+/* New hero direction: warm paper, ink typography, and an offset interface object. */
+.topbar { color: var(--ink); }
+.nav-links { color: #57565e; }
+.nav-links a:hover, .login-link:hover { color: #6a8000; }
+.hero { min-height: 900px; color: var(--ink); background: radial-gradient(circle at 73% 38%, rgba(216,255,79,.32), transparent 20%), radial-gradient(circle at 80% 75%, rgba(183,166,255,.28), transparent 22%), #f3f2ec; }
+.hero::after { background: linear-gradient(transparent, rgba(236,236,229,.82)); }
+.hero-grid { opacity: .42; background-image: linear-gradient(rgba(16,16,20,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(16,16,20,.055) 1px, transparent 1px); mask-image: linear-gradient(to right, black, transparent 82%); }
+.hero-glow--one { mix-blend-mode: multiply; opacity: .47; }.hero-glow--two { mix-blend-mode: multiply; opacity: .42; }
+.hero .eyebrow { color: #66656d; }.hero .eyebrow-dot { background: var(--ink); }
+.hero-lede { color: #5d5c65; }.hero-proof { color: #77767e; }.avatar-stack span { border-color: #f3f2ec; }
+.demo-orbit { border-color: rgba(16,16,20,.16); }.demo-orbit--inner { border-color: rgba(16,16,20,.12); }
+.scroll-cue { color: #8a8990; }.scroll-line { background: #aaa9ad; }
+.hero-agent-card { animation: cardFloat 7s ease-in-out infinite; }
+@media (max-width: 760px) { .hero { min-height: 900px; padding-top: 130px; }.nav-links--open { color: var(--ink); }.tilt-card:hover { transform: none; }.tilt-card::after { display: none; } }

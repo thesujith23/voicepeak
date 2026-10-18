@@ -67,6 +67,8 @@ function App() {
   const [isAnnual, setIsAnnual] = useState(true)
   const [openFaq, setOpenFaq] = useState(0)
   const [isDemoLive, setIsDemoLive] = useState(false)
+  const [demoOpen, setDemoOpen] = useState(false)
+  const [demoSubmitted, setDemoSubmitted] = useState(false)
   const heroRef = useRef(null)
 
   useEffect(() => {
@@ -194,10 +196,31 @@ function App() {
     return () => cleanups.forEach((cleanup) => cleanup())
   }, [])
 
+  useEffect(() => {
+    if (!demoOpen) return undefined
+    const onKeyDown = (event) => { if (event.key === 'Escape') setDemoOpen(false) }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKeyDown)
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', onKeyDown) }
+  }, [demoOpen])
+
   const handleAnchor = (event, id) => {
     event.preventDefault()
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
+  }
+
+  const openDemo = (event) => {
+    event.preventDefault()
+    setMenuOpen(false)
+    setDemoSubmitted(false)
+    setDemoOpen(true)
+  }
+
+  const submitDemo = (event) => {
+    event.preventDefault()
+    setDemoSubmitted(true)
   }
 
   return (
@@ -214,9 +237,9 @@ function App() {
           <a href="#solutions" onClick={(event) => handleAnchor(event, '#solutions')}>Solutions</a>
           <a href="#pricing" onClick={(event) => handleAnchor(event, '#pricing')}>Pricing</a>
           <a href="#resources" onClick={(event) => handleAnchor(event, '#resources')}>Resources</a>
-          <div className="nav-mobile-actions"><a href="#login">Log in</a><a className="button button--small button--dark" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>Book a demo <Icon name="arrow" size={15} /></a></div>
+          <div className="nav-mobile-actions"><a href="#login">Log in</a><a className="button button--small button--dark" href="#demo" onClick={openDemo}>Book a demo <Icon name="arrow" size={15} /></a></div>
         </nav>
-        <div className="topbar-actions"><a className="login-link" href="#login">Log in</a><a className="button button--small button--dark" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>Book a demo <Icon name="arrow" size={15} /></a></div>
+        <div className="topbar-actions"><a className="login-link" href="#login">Log in</a><a className="button button--small button--dark" href="#demo" onClick={openDemo}>Book a demo <Icon name="arrow" size={15} /></a></div>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}><Icon name={menuOpen ? 'close' : 'menu'} size={22} /></button>
       </header>
 
@@ -234,7 +257,7 @@ function App() {
           </div>
           <div className="hero-constellation reveal is-visible" style={{ '--delay': '140ms' }}>
             <div className="constellation-top"><span><i /> VYCE / VOICE IN MOTION</span><span>01 — 03</span></div>
-            <div className="constellation-grid" />
+            <div className="constellation-field" aria-hidden="true" />
             <div className="constellation-orbit constellation-orbit--one" /><div className="constellation-orbit constellation-orbit--two" />
             <div className="constellation-thread constellation-thread--one" /><div className="constellation-thread constellation-thread--two" />
             <div className="constellation-core">
@@ -255,7 +278,17 @@ function App() {
           <div className="feature-layout"><div className="feature-intro reveal"><div className="feature-quote"><Icon name="quote" size={28} /><p>“Finally, an AI that knows when to talk, when to listen, and when to just get it done.”</p><span>— Maya Chen, COO at Morrow</span></div><div className="feature-ticker"><span className="ticker-number">24/7</span><span>Always on.<br />Never on autopilot.</span></div></div><div className="feature-grid">{featureData.map((feature, index) => <article className={`feature-card feature-card--${feature.accent} reveal tilt-card`} key={feature.title} style={{ '--delay': `${index * 90}ms` }}><div className="feature-card-top"><span className="feature-icon"><Icon name={feature.icon} size={21} /></span><span className="feature-number">{feature.number}</span></div><h3>{feature.title}</h3><p>{feature.body}</p><a href="#demo" onClick={(event) => handleAnchor(event, '#demo')} aria-label={`Learn more about ${feature.title}`}><Icon name="arrow" size={18} /></a></article>)}</div></div>
         </section>
 
-        <section className="section workflow-section story-section" id="solutions" data-story="think" data-chapter="03"><div className="workflow-copy reveal"><div className="eyebrow"><span className="eyebrow-dot" /> From first hello to done</div><h2>The conversation<br /><em>is the workflow.</em></h2><p>Give your team a head start with an agent that can listen, reason, and take action in one natural flow.</p><a className="text-link text-link--dark" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>See how it works <Icon name="arrow" size={16} /></a></div><div className="workflow-steps reveal"><div className="workflow-step"><span className="step-index">01</span><div><h3>Listen</h3><p>vyce hears the words behind the words, capturing intent and sentiment in real time.</p></div><span className="step-icon"><Icon name="wave" size={20} /></span></div><div className="workflow-connector" /><div className="workflow-step"><span className="step-index">02</span><div><h3>Think</h3><p>It reasons with your knowledge, policies, and live context—without losing the human tone.</p></div><span className="step-icon"><Icon name="spark" size={20} /></span></div><div className="workflow-connector" /><div className="workflow-step"><span className="step-index">03</span><div><h3>Do</h3><p>It updates, books, routes, and follows through. The work is done before the goodbye.</p></div><span className="step-icon"><Icon name="check" size={20} /></span></div></div></section>
+        <section className="section workflow-section workflow-rebuild story-section" id="solutions" data-story="think" data-chapter="03">
+          <div className="workflow-rebuild-kicker"><span className="eyebrow"><span className="eyebrow-dot" /> From first hello to done</span><span className="workflow-live"><i /> LIVE PATH / 03 MOVES</span></div>
+          <div className="workflow-copy reveal"><div><h2>The conversation<br /><em>is the workflow.</em></h2></div><div className="workflow-intro-side"><p>Give your team a head start with an agent that can listen, reason, and take action in one natural flow.</p><a className="text-link text-link--dark" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>See how it works <Icon name="arrow" size={16} /></a></div></div>
+          <div className="workflow-steps reveal">
+            <div className="workflow-step workflow-step--listen"><div className="workflow-step-top"><span className="step-index">01</span><span className="step-icon"><Icon name="wave" size={20} /></span></div><div><h3>Listen</h3><p>vyce hears the words behind the words, capturing intent and sentiment in real time.</p></div><span className="workflow-step-tag">signal received</span></div>
+            <div className="workflow-connector" aria-hidden="true"><span /></div>
+            <div className="workflow-step workflow-step--think"><div className="workflow-step-top"><span className="step-index">02</span><span className="step-icon"><Icon name="spark" size={20} /></span></div><div><h3>Think</h3><p>It reasons with your knowledge, policies, and live context—without losing the human tone.</p></div><span className="workflow-step-tag">intent clear</span></div>
+            <div className="workflow-connector" aria-hidden="true"><span /></div>
+            <div className="workflow-step workflow-step--do"><div className="workflow-step-top"><span className="step-index">03</span><span className="step-icon"><Icon name="check" size={20} /></span></div><div><h3>Do</h3><p>It updates, books, routes, and follows through. The work is done before the goodbye.</p></div><span className="workflow-step-tag">next step done</span></div>
+          </div>
+        </section>
 
         <section className="video-section section story-section" id="demo" data-story="speak" data-chapter="04"><div className="video-head reveal"><div><div className="eyebrow eyebrow--light"><span className="eyebrow-dot" /> See vyce in motion</div><h2>More than a voice.<br /><em>A point of view.</em></h2></div><p>Watch a 62-second walkthrough of the little moments that make a big difference.</p></div><div className="video-card reveal"><div className="video-grid-lines" /><div className="video-signal"><div className="video-signal-ring video-signal-ring--one" /><div className="video-signal-ring video-signal-ring--two" /><div className="video-signal-core"><VoiceVisualizer /></div></div><div className="video-overlay-top"><span className="video-badge"><span /> vyce / Live</span><span>01:02 / 01:02</span></div><button className="play-button" onClick={() => setIsPlaying(!isPlaying)} aria-label={isPlaying ? 'Pause video' : 'Play video'}><Icon name={isPlaying ? 'pause' : 'play'} size={25} /></button><div className="video-overlay-bottom"><span>How great conversations get to “done.”</span><span className="video-progress"><i style={{ width: isPlaying ? '72%' : '28%' }} /></span><span>00:34</span></div></div></section>
 
@@ -271,6 +304,13 @@ function App() {
 
         <section className="cta-section story-section" data-story="start" data-chapter="10"><div className="cta-glow" /><div className="cta-content reveal"><div className="eyebrow eyebrow--light"><span className="eyebrow-dot" /> Your next great conversation</div><h2>Let’s make<br /><em>it count.</em></h2><p>Give your team a voice that never misses the moment.</p><div className="hero-actions"><a className="button button--lime" href="mailto:hello@vyce.ai">Start a conversation <Icon name="arrow" size={17} /></a><span className="cta-note"><Icon name="spark" size={15} /> Setup takes less than a day</span></div></div><div className="cta-orbit cta-orbit--one" /><div className="cta-orbit cta-orbit--two" /></section>
       </main>
+
+      {demoOpen && <div className="demo-modal-backdrop" role="presentation" onMouseDown={() => setDemoOpen(false)}>
+        <div className="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" onMouseDown={(event) => event.stopPropagation()}>
+          <button className="demo-modal-close" onClick={() => setDemoOpen(false)} aria-label="Close booking form"><Icon name="close" size={19} /></button>
+          {demoSubmitted ? <div className="demo-success"><span className="demo-success-mark"><Icon name="check" size={25} /></span><span className="eyebrow"><span className="eyebrow-dot" /> Request received</span><h2>Let’s find your<br /><em>best next step.</em></h2><p>Thanks — the vyce team will follow up with a time that works for you.</p><button className="button button--lime" onClick={() => setDemoOpen(false)}>Done <Icon name="arrow" size={16} /></button></div> : <><div className="demo-modal-head"><span className="eyebrow"><span className="eyebrow-dot" /> A better conversation starts here</span><h2 id="demo-modal-title">See what vyce<br /><em>can move.</em></h2><p>Tell us a little about your team and we’ll shape a useful first conversation.</p></div><form className="demo-form" onSubmit={submitDemo}><div className="demo-form-row"><label>Full name<input name="name" type="text" placeholder="Maya Chen" required /></label><label>Work email<input name="email" type="email" placeholder="maya@company.com" required /></label></div><div className="demo-form-row"><label>Company<input name="company" type="text" placeholder="Morrow" required /></label><label>Team size<select name="teamSize" defaultValue="" required><option value="" disabled>Select one</option><option>1–10</option><option>11–50</option><option>51–200</option><option>201+</option></select></label></div><label>What should vyce help with?<select name="useCase" defaultValue="" required><option value="" disabled>Choose a starting point</option><option>Sales conversations</option><option>Customer support</option><option>Operations &amp; scheduling</option><option>Something custom</option></select></label><div className="demo-form-row"><label>Preferred date<input name="date" type="date" required /></label><label>Preferred time<select name="time" defaultValue="" required><option value="" disabled>Choose a time</option><option>09:00 – 10:00</option><option>11:00 – 12:00</option><option>14:00 – 15:00</option><option>16:00 – 17:00</option></select></label></div><button className="button button--lime demo-form-submit" type="submit">Find a time <Icon name="arrow" size={16} /></button><p className="demo-form-footnote"><Icon name="lock" size={13} /> No hard sell. Just a useful first conversation.</p></form></>}
+        </div>
+      </div>}
 
       <footer className="footer"><div className="footer-top"><a className="brand brand--footer" href="#top" onClick={(event) => handleAnchor(event, '#top')}><span className="brand-mark"><span /><span /><span /></span><span>vyce</span></a><p>Conversation, elevated.</p><div className="footer-socials"><a href="#linkedin">in</a><a href="#x">x</a><a href="#youtube">▶</a></div></div><div className="footer-links"><div><span>Product</span><a href="#product">Features</a><a href="#demo">Live demo</a><a href="#pricing">Pricing</a></div><div><span>Company</span><a href="#about">About</a><a href="#careers">Careers <small>We’re hiring</small></a><a href="#contact">Contact</a></div><div><span>Resources</span><a href="#docs">Documentation</a><a href="#stories">Customer stories</a><a href="#security">Security</a></div><div><span>Legal</span><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="#status">Status <i /></a></div></div><div className="footer-bottom"><span>© 2025 vyce, Inc.</span><span>Made for the moments that matter.</span><span>San Francisco · New York · Everywhere</span></div></footer>
     </div>

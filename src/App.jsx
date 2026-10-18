@@ -232,13 +232,19 @@ function App() {
             <div className="hero-actions"><a className="button button--lime" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>Hear vyce speak <Icon name="arrow" size={17} /></a><a className="text-link" href="#product" onClick={(event) => handleAnchor(event, '#product')}>Explore the idea <Icon name="arrow" size={16} /></a></div>
             <div className="hero-proof"><div className="avatar-stack"><span>AM</span><span>JL</span><span>SK</span><span>+</span></div><span>Built for the conversations that matter</span></div>
           </div>
-          <div className="hero-demo vyce-hero-stage reveal is-visible" style={{ '--delay': '140ms' }}>
-            <div className="stage-label"><span className="stage-live"><i /> LIVE WITH VYCE</span><span>CONVERSATION / 001</span></div>
-            <div className="stage-arc stage-arc--one" /><div className="stage-arc stage-arc--two" />
-            <div className="vyce-core"><div className="core-halo" /><div className="core-letter">V</div><VoiceVisualizer compact /></div>
-            <div className="transcript-card transcript-card--one"><span className="transcript-avatar transcript-avatar--lime">C</span><div><small>Customer</small><p>“I need this sorted today.”</p></div></div>
-            <div className="transcript-card transcript-card--two"><span className="transcript-avatar transcript-avatar--blue"><Icon name="spark" size={13} /></span><div><small>vyce understood</small><p>“On it. I found the fastest route.”</p></div></div>
-            <div className="stage-bottom"><div><span className="stage-caption">Listening for the thing<br /><strong>behind the words.</strong></span><VoiceVisualizer compact /></div><div className="stage-controls"><button className={`stage-chip ${heroMode === 'listen' ? 'stage-chip--active' : ''}`} onClick={() => setHeroMode('listen')}><Icon name="mic" size={14} /> Listen</button><button className={`stage-chip ${heroMode === 'act' ? 'stage-chip--active' : ''}`} onClick={() => setHeroMode('act')}><Icon name="bolt" size={14} /> Act</button><button className={`stage-record ${isDemoLive ? 'stage-record--active' : ''}`} onClick={() => setIsDemoLive(!isDemoLive)} aria-label={isDemoLive ? 'Stop vyce demo' : 'Start vyce demo'}><span /></button></div></div>
+          <div className="hero-demo vyce-hero-stage reveal is-visible signal-scene" style={{ '--delay': '140ms' }}>
+            <div className="signal-scene-top"><span className="scene-kicker"><i /> VYCE / LIVE SIGNAL</span><span className="scene-id">VOICE NOTE 001</span></div>
+            <div className="signal-sweep signal-sweep--one" /><div className="signal-sweep signal-sweep--two" />
+            <div className="signal-axis signal-axis--vertical" /><div className="signal-axis signal-axis--horizontal" />
+            <div className="signal-word signal-word--top">intent</div><div className="signal-word signal-word--bottom">action</div>
+            <div className="signal-core">
+              <div className="signal-core-ring signal-core-ring--outer" /><div className="signal-core-ring signal-core-ring--inner" />
+              <div className="signal-core-face"><span>V</span><VoiceVisualizer compact /></div>
+              <span className="signal-core-label">{heroMode === 'act' ? 'READY TO ACT' : 'LISTENING'}</span>
+            </div>
+            <div className="signal-note signal-note--input"><span className="signal-note-dot signal-note-dot--lime" /><div><small>Customer / 09:41</small><p>“Can we make this easier?”</p></div></div>
+            <div className="signal-note signal-note--output"><span className="signal-note-dot signal-note-dot--blue"><Icon name="spark" size={13} /></span><div><small>vyce / understood</small><p>Route found. Next step ready.</p></div></div>
+            <div className="signal-footer"><div><span className="signal-caption">A voice that catches<br /><strong>what comes next.</strong></span><VoiceVisualizer compact /></div><div className="stage-controls"><button className={`stage-chip ${heroMode === 'listen' ? 'stage-chip--active' : ''}`} onClick={() => setHeroMode('listen')}><Icon name="mic" size={14} /> Listen</button><button className={`stage-chip ${heroMode === 'act' ? 'stage-chip--active' : ''}`} onClick={() => setHeroMode('act')}><Icon name="bolt" size={14} /> Act</button><button className={`stage-record ${isDemoLive ? 'stage-record--active' : ''}`} onClick={() => setIsDemoLive(!isDemoLive)} aria-label={isDemoLive ? 'Stop vyce demo' : 'Start vyce demo'}><span /></button></div></div>
           </div>
           <div className="scroll-cue"><span className="scroll-line" /> Scroll to meet vyce <Icon name="arrowUp" size={14} /></div>
         </section>

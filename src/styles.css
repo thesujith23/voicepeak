@@ -251,3 +251,7 @@ h1 { max-width: 610px; margin-top: 32px; font-size: clamp(65px, 8.4vw, 122px); l
 @media (min-width: 761px) { .parallax-section { height: min(710px, 100vh); min-height: 610px; }.cta-section { height: min(570px, 100vh); min-height: 500px; } }
 @media (max-width: 760px) { .features-section::after { display: none; }.workflow-steps::before { left: 42px; }.workflow-step::before { left: 38px; }.workflow-connector { margin-left: 42px; } }
 @media (prefers-reduced-motion: reduce) { .workflow-section::after, .workflow-connector { animation: none; }.workflow-step:hover { transform: none; } }
+
+/* Preview edit: exact CTA color adjustments. */
+.cta-section { background: #ff0000; }
+.cta-note { color: #ffffff; }

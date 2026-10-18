@@ -232,19 +232,19 @@ function App() {
             <div className="hero-actions"><a className="button button--lime" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>Hear vyce speak <Icon name="arrow" size={17} /></a><a className="text-link" href="#product" onClick={(event) => handleAnchor(event, '#product')}>Explore the idea <Icon name="arrow" size={16} /></a></div>
             <div className="hero-proof"><div className="avatar-stack"><span>AM</span><span>JL</span><span>SK</span><span>+</span></div><span>Built for the conversations that matter</span></div>
           </div>
-          <div className="hero-demo vyce-hero-stage reveal is-visible signal-scene" style={{ '--delay': '140ms' }}>
-            <div className="signal-scene-top"><span className="scene-kicker"><i /> VYCE / LIVE SIGNAL</span><span className="scene-id">VOICE NOTE 001</span></div>
-            <div className="signal-sweep signal-sweep--one" /><div className="signal-sweep signal-sweep--two" />
-            <div className="signal-axis signal-axis--vertical" /><div className="signal-axis signal-axis--horizontal" />
-            <div className="signal-word signal-word--top">intent</div><div className="signal-word signal-word--bottom">action</div>
-            <div className="signal-core">
-              <div className="signal-core-ring signal-core-ring--outer" /><div className="signal-core-ring signal-core-ring--inner" />
-              <div className="signal-core-face"><span>V</span><VoiceVisualizer compact /></div>
-              <span className="signal-core-label">{heroMode === 'act' ? 'READY TO ACT' : 'LISTENING'}</span>
+          <div className="hero-constellation reveal is-visible" style={{ '--delay': '140ms' }}>
+            <div className="constellation-top"><span><i /> VYCE / VOICE IN MOTION</span><span>01 — 03</span></div>
+            <div className="constellation-grid" />
+            <div className="constellation-orbit constellation-orbit--one" /><div className="constellation-orbit constellation-orbit--two" />
+            <div className="constellation-thread constellation-thread--one" /><div className="constellation-thread constellation-thread--two" />
+            <div className="constellation-core">
+              <div className="constellation-halo" /><div className="constellation-face"><span>V</span><VoiceVisualizer compact /></div>
+              <span>{heroMode === 'act' ? 'READY TO ACT' : 'LISTENING'}</span>
             </div>
-            <div className="signal-note signal-note--input"><span className="signal-note-dot signal-note-dot--lime" /><div><small>Customer / 09:41</small><p>“Can we make this easier?”</p></div></div>
-            <div className="signal-note signal-note--output"><span className="signal-note-dot signal-note-dot--blue"><Icon name="spark" size={13} /></span><div><small>vyce / understood</small><p>Route found. Next step ready.</p></div></div>
-            <div className="signal-footer"><div><span className="signal-caption">A voice that catches<br /><strong>what comes next.</strong></span><VoiceVisualizer compact /></div><div className="stage-controls"><button className={`stage-chip ${heroMode === 'listen' ? 'stage-chip--active' : ''}`} onClick={() => setHeroMode('listen')}><Icon name="mic" size={14} /> Listen</button><button className={`stage-chip ${heroMode === 'act' ? 'stage-chip--active' : ''}`} onClick={() => setHeroMode('act')}><Icon name="bolt" size={14} /> Act</button><button className={`stage-record ${isDemoLive ? 'stage-record--active' : ''}`} onClick={() => setIsDemoLive(!isDemoLive)} aria-label={isDemoLive ? 'Stop vyce demo' : 'Start vyce demo'}><span /></button></div></div>
+            <div className="constellation-note constellation-note--input"><span className="constellation-note-mark">C</span><div><small>Customer / now</small><p>“Make this easier?”</p></div></div>
+            <div className="constellation-note constellation-note--output"><span className="constellation-note-mark constellation-note-mark--blue"><Icon name="spark" size={13} /></span><div><small>vyce / next move</small><p>Route found.</p></div></div>
+            <div className="constellation-caption"><span>LISTEN</span><span className="constellation-caption-line" /><span>UNDERSTAND</span><span className="constellation-caption-line" /><span>MOVE</span></div>
+            <div className="constellation-controls"><button className={`constellation-control ${heroMode === 'listen' ? 'is-active' : ''}`} onClick={() => setHeroMode('listen')}><Icon name="mic" size={13} /> Listen</button><button className={`constellation-control ${heroMode === 'act' ? 'is-active' : ''}`} onClick={() => setHeroMode('act')}><Icon name="bolt" size={13} /> Act</button><button className={`constellation-record ${isDemoLive ? 'is-live' : ''}`} onClick={() => setIsDemoLive(!isDemoLive)} aria-label={isDemoLive ? 'Stop vyce demo' : 'Start vyce demo'}><span /></button></div>
           </div>
           <div className="scroll-cue"><span className="scroll-line" /> Scroll to meet vyce <Icon name="arrowUp" size={14} /></div>
         </section>

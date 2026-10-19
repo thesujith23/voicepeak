@@ -78,6 +78,7 @@ function App() {
   const [demoOpen, setDemoOpen] = useState(false)
   const [demoSubmitted, setDemoSubmitted] = useState(false)
   const heroRef = useRef(null)
+  const constellationRef = useRef(null)
 
   useEffect(() => {
     const elements = document.querySelectorAll('.reveal')
@@ -102,6 +103,29 @@ function App() {
     const node = heroRef.current
     node?.addEventListener('pointermove', handleMove)
     return () => node?.removeEventListener('pointermove', handleMove)
+  }, [])
+
+  useEffect(() => {
+    const node = constellationRef.current
+    if (!node) return undefined
+    const handleMove = (event) => {
+      const rect = node.getBoundingClientRect()
+      const x = (event.clientX - rect.left) / rect.width - 0.5
+      const y = (event.clientY - rect.top) / rect.height - 0.5
+      node.style.setProperty('--constellation-tilt-x', `${x * 10}deg`)
+      node.style.setProperty('--constellation-tilt-y', `${y * -10}deg`)
+      node.style.setProperty('--constellation-shift-x', `${x * 14}px`)
+      node.style.setProperty('--constellation-shift-y', `${y * 10}px`)
+    }
+    const reset = () => {
+      node.style.setProperty('--constellation-tilt-x', '0deg')
+      node.style.setProperty('--constellation-tilt-y', '0deg')
+      node.style.setProperty('--constellation-shift-x', '0px')
+      node.style.setProperty('--constellation-shift-y', '0px')
+    }
+    node.addEventListener('pointermove', handleMove)
+    node.addEventListener('pointerleave', reset)
+    return () => { node.removeEventListener('pointermove', handleMove); node.removeEventListener('pointerleave', reset) }
   }, [])
 
   useEffect(() => {
@@ -263,13 +287,13 @@ function App() {
             <div className="hero-actions"><a className="button button--lime" href="#demo" onClick={(event) => handleAnchor(event, '#demo')}>Hear vyce speak <Icon name="arrow" size={17} /></a><a className="text-link" href="#product" onClick={(event) => handleAnchor(event, '#product')}>Explore the idea <Icon name="arrow" size={16} /></a></div>
             <div className="hero-proof"><div className="avatar-stack"><span>AM</span><span>JL</span><span>SK</span><span>+</span></div><span>Built for the conversations that matter</span></div>
           </div>
-          <div className="hero-constellation reveal is-visible" style={{ '--delay': '140ms' }}>
+          <div className="hero-constellation reveal is-visible" ref={constellationRef} style={{ '--delay': '140ms' }}>
             <div className="constellation-top"><span><i /> VYCE / VOICE IN MOTION</span><span>01 — 03</span></div>
             <div className="constellation-field" aria-hidden="true" />
             <div className="constellation-orbit constellation-orbit--one" /><div className="constellation-orbit constellation-orbit--two" />
             <div className="constellation-thread constellation-thread--one" /><div className="constellation-thread constellation-thread--two" />
             <div className="constellation-core">
-              <div className="constellation-halo" /><div className="constellation-face"><span>V</span><VoiceVisualizer compact /></div>
+              <div className="constellation-halo" /><div className="constellation-face"><span>V</span></div>
               <span>{heroMode === 'act' ? 'READY TO ACT' : 'LISTENING'}</span>
             </div>
             <div className="constellation-note constellation-note--input"><span className="constellation-note-mark">C</span><div><small>Customer / now</small><p>“Make this easier?”</p></div></div>

@@ -328,3 +328,54 @@ h1 { max-width: 610px; margin-top: 32px; font-size: clamp(65px, 8.4vw, 122px); l
 .feature-visual-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px; color: rgba(16,16,20,.72); font: 10px "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
 .feature-visual-fallback svg { width: 34px; height: 34px; padding: 7px; border: 1px solid rgba(16,16,20,.35); border-radius: 50%; }
 .feature-visual img { position: relative; z-index: 1; }
+
+
+/* Preview edit: the constellation now behaves like a hovering 3D object. */
+.hero-constellation { --constellation-tilt-x: 0deg; --constellation-tilt-y: 0deg; --constellation-shift-x: 0px; --constellation-shift-y: 0px; transform: perspective(1250px) translate3d(var(--constellation-shift-x), var(--constellation-shift-y), 0) rotateX(var(--constellation-tilt-y)) rotateY(var(--constellation-tilt-x)); transform-style: preserve-3d; will-change: transform; transition: transform .18s cubic-bezier(.2,.8,.2,1), filter .25s ease; }
+.hero-constellation:hover { filter: saturate(1.08); }
+.hero-constellation .constellation-field { transform: translateZ(-28px) scale(1.06); transform-style: preserve-3d; }
+.hero-constellation .constellation-core { transform: translate(-50%, -50%) translateZ(32px); transform-style: preserve-3d; }
+.hero-constellation .constellation-face { box-shadow: 0 0 42px rgba(201,255,62,.48), 0 24px 40px rgba(65,76,20,.22); transform: translateZ(18px); }
+.hero-constellation .constellation-note { transform-style: preserve-3d; }
+
+/* Preview edit: keep the full feature map in a single-screen product board at compact widths. */
+@media (max-width: 760px) {
+  .features-section { height: 100vh; min-height: 626px; max-height: 100vh; overflow: hidden; padding: 52px 24px 18px; }
+  .features-section .section-heading { display: flex; align-items: end; gap: 12px; margin-bottom: 13px; }
+  .features-section .section-heading h2 { margin: 8px 0 0; font-size: clamp(35px, 7.8vw, 53px); line-height: .88; }
+  .features-section .section-heading > p { width: 42%; margin: 0 0 2px; font-size: 10px; line-height: 1.35; }
+  .features-section .feature-layout { display: block; }
+  .features-section .feature-intro { display: block; min-height: 0; height: 37px; margin: 0 0 12px; }
+  .features-section .feature-quote { display: none; }
+  .features-section .feature-ticker { height: 100%; padding: 0; border-top: 0; align-items: center; }
+  .features-section .ticker-number { font-size: 30px; }
+  .features-section .feature-ticker > span:last-child { font-size: 9px; }
+  .features-section .feature-grid { height: calc(100vh - 205px); min-height: 360px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .features-section .feature-card, .features-section .feature-card--has-image { min-height: 0; height: auto; padding: 11px 10px 12px; display: flex; flex-direction: column; gap: 0; }
+  .features-section .feature-card-top { align-items: flex-start; gap: 5px; }
+  .features-section .feature-meta { min-width: 0; display: block; }
+  .features-section .feature-icon { width: 27px; height: 27px; margin-bottom: 5px; }
+  .features-section .feature-icon svg { width: 15px; height: 15px; }
+  .features-section .feature-label { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 6px; }
+  .features-section .feature-number { font-size: 8px; }
+  .features-section .feature-visual { height: 26px; margin: 7px -10px 0; }
+  .features-section .feature-visual-fallback { gap: 5px; font-size: 6px; }
+  .features-section .feature-visual-fallback svg { width: 17px; height: 17px; padding: 3px; }
+  .features-section .feature-card h3, .features-section .feature-card--has-image h3 { max-width: none; margin: 10px 0 5px; font-size: 12px; line-height: 1.05; letter-spacing: -.06em; }
+  .features-section .feature-card p { display: -webkit-box; width: auto; max-width: none; margin: 0; overflow: hidden; color: #76757d; font-size: 8px; line-height: 1.25; -webkit-box-orient: vertical; line-clamp: 2; -webkit-line-clamp: 2; }
+  .features-section .feature-signal { left: 10px; bottom: 10px; gap: 4px; }
+  .features-section .feature-signal strong { font-size: 14px; }
+  .features-section .feature-signal span { font-size: 6px; }
+  .features-section .feature-card > a { display: none; }
+}
+@media (max-width: 430px) {
+  .features-section { min-height: 760px; height: 100vh; padding: 48px 18px 16px; }
+  .features-section .section-heading { display: block; margin-bottom: 10px; }
+  .features-section .section-heading > p { width: 100%; max-width: 270px; margin-top: 12px; }
+  .features-section .feature-intro { height: 31px; margin-bottom: 9px; }
+  .features-section .feature-grid { height: calc(100vh - 200px); min-height: 540px; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-constellation { transition: none; transform: none; } }
+
+@media (max-width: 760px) { .features-section .feature-card p { line-clamp: 2; } }
+.hero.story-section .hero-constellation { transform: perspective(1250px) translate3d(var(--constellation-shift-x), var(--constellation-shift-y), 0) rotateX(var(--constellation-tilt-y)) rotateY(var(--constellation-tilt-x)) !important; }

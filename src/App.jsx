@@ -2,10 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import './styles.css'
 
 const featureData = [
-  { icon: 'wave', number: '01', title: 'Sounds like your best rep', body: 'Natural interruptions, warmth, and context-aware pacing make every call feel genuinely human.', accent: 'lime' },
-  { icon: 'spark', number: '02', title: 'Thinks on its feet', body: 'vyce follows intent, not scripts—handling curveballs without losing the thread.', accent: 'violet' },
-  { icon: 'bolt', number: '03', title: 'Moves work forward', body: 'Book the meeting, update the CRM, or route a hot lead before the call ends.', accent: 'coral' },
-  { icon: 'globe', number: '04', title: 'Ready wherever you are', body: 'Launch across 32 languages with local nuance and the same brand voice.', accent: 'blue' },
+  { icon: 'globe', number: '01', label: 'MULTILANGUAGE', title: 'Speak their language.', body: 'Natural conversations across the languages your customers already use.', signal: '32+', signalLabel: 'languages', accent: 'lime', image: '/manus-storage/vyce-call-console_d58db8d8.jpg' },
+  { icon: 'phoneIn', number: '02', label: 'INBOUND CALLS', title: 'Answer with context.', body: 'Greet, qualify, route, and resolve without putting people on hold.', signal: '24/7', signalLabel: 'availability', accent: 'violet' },
+  { icon: 'phoneOut', number: '03', label: 'OUTBOUND CAMPAIGNS', title: 'Turn intent into motion.', body: 'Launch focused campaigns with consistent, human conversations at scale.', signal: '1.2k', signalLabel: 'calls queued', accent: 'coral' },
+  { icon: 'file', number: '04', label: 'CALL TRANSCRIPTS', title: 'Keep the useful parts.', body: 'Every conversation becomes searchable context your team can act on.', signal: '100%', signalLabel: 'searchable', accent: 'blue' },
+  { icon: 'phone', number: '05', label: 'CALL LOGS', title: 'See the whole signal.', body: 'Track outcomes, volume, and follow-ups from one calm command view.', signal: '+18%', signalLabel: 'follow-up lift', accent: 'lime' },
+  { icon: 'globe', number: '06', label: 'LIVE WEB CALL', title: 'Meet them where they are.', body: 'Let visitors start a live voice conversation directly from your site.', signal: '00:42', signalLabel: 'live session', accent: 'violet' },
+  { icon: 'spark', number: '07', label: 'NO-CODE CREATION', title: 'Build without the bottleneck.', body: 'Choose a goal, add your knowledge, and bring a new agent to life.', signal: '03', signalLabel: 'steps to launch', accent: 'coral' },
+  { icon: 'mic', number: '08', label: 'VOICE LIBRARY', title: 'Give every moment a voice.', body: 'Dial in the tone, cadence, and character that fits your brand.', signal: '05', signalLabel: 'voices ready', accent: 'blue', image: '/manus-storage/vyce-agent-builder_ec8392ca.jpg' },
 ]
 
 const logos = ['arcade', 'Morrow', 'Lattice', 'rayban', 'northstar']
@@ -38,6 +42,10 @@ function Icon({ name, size = 20, strokeWidth = 1.8 }) {
     spark: <><path d="m12 3-1.6 5.4L5 10l5.4 1.6L12 17l1.6-5.4L19 10l-5.4-1.6L12 3Z" /><path d="m19 16-.7 2.3L16 19l2.3.7L19 22l.7-2.3L22 19l-2.3-.7L19 16Z" /></>,
     bolt: <path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z" />,
     globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.4 2.5 3.5 5.5 3.5 9s-1.1 6.5-3.5 9c-2.4-2.5-3.5-5.5-3.5-9S9.6 5.5 12 3Z" /></>,
+    phoneIn: <><path d="M5 4h4l2 5-2.5 1.7a13 13 0 0 0 4.8 4.8L15 13l5 2v4c0 1.1-.9 2-2 2C10.3 21 3 13.7 3 5a2 2 0 0 1 2-2Z" /><path d="M15 5h6M18 2l3 3-3 3" /></>,
+    phoneOut: <><path d="M5 4h4l2 5-2.5 1.7a13 13 0 0 0 4.8 4.8L15 13l5 2v4c0 1.1-.9 2-2 2C10.3 21 3 13.7 3 5a2 2 0 0 1 2-2Z" /><path d="M15 5h6M18 2l3 3-3 3" transform="rotate(180 18 5)" /></>,
+    phone: <><path d="M5 4h4l2 5-2.5 1.7a13 13 0 0 0 4.8 4.8L15 13l5 2v4c0 1.1-.9 2-2 2C10.3 21 3 13.7 3 5a2 2 0 0 1 2-2Z" /></>,
+    file: <><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v5h5M9 13h6M9 17h6" /></>,
     play: <path d="m9 6 9 6-9 6V6Z" fill="currentColor" stroke="none" />,
     pause: <><path d="M8 5v14M16 5v14" /></>,
     check: <path d="m5 12 4 4L19 6" />,
@@ -275,7 +283,7 @@ function App() {
 
         <section className="section features-section story-section" id="product" data-story="listen" data-chapter="02">
           <div className="section-heading reveal"><div><div className="eyebrow"><span className="eyebrow-dot" /> Why vyce</div><h2>A voice agent<br /><em>with range.</em></h2></div><p>Most AI can answer a question. vyce understands what needs to happen next—and makes it happen.</p></div>
-          <div className="feature-layout"><div className="feature-intro reveal"><div className="feature-quote"><Icon name="quote" size={28} /><p>“Finally, an AI that knows when to talk, when to listen, and when to just get it done.”</p><span>— Maya Chen, COO at Morrow</span></div><div className="feature-ticker"><span className="ticker-number">24/7</span><span>Always on.<br />Never on autopilot.</span></div></div><div className="feature-grid">{featureData.map((feature, index) => <article className={`feature-card feature-card--${feature.accent} reveal tilt-card`} key={feature.title} style={{ '--delay': `${index * 90}ms` }}><div className="feature-card-top"><span className="feature-icon"><Icon name={feature.icon} size={21} /></span><span className="feature-number">{feature.number}</span></div><h3>{feature.title}</h3><p>{feature.body}</p><a href="#demo" onClick={(event) => handleAnchor(event, '#demo')} aria-label={`Learn more about ${feature.title}`}><Icon name="arrow" size={18} /></a></article>)}</div></div>
+          <div className="feature-layout"><div className="feature-intro reveal"><div className="feature-quote"><Icon name="quote" size={28} /><p>“Finally, an AI that knows when to talk, when to listen, and when to just get it done.”</p><span>— Maya Chen, COO at Morrow</span></div><div className="feature-ticker"><span className="ticker-number">24/7</span><span>Always on.<br />Never on autopilot.</span></div></div><div className="feature-grid">{featureData.map((feature, index) => <article className={`feature-card feature-card--${feature.accent} ${feature.image ? 'feature-card--has-image' : ''} reveal tilt-card`} key={feature.title} style={{ '--delay': `${index * 90}ms` }}><div className="feature-card-top"><div className="feature-meta"><span className="feature-icon"><Icon name={feature.icon} size={21} /></span><span className="feature-label">{feature.label}</span></div><span className="feature-number">{feature.number}</span></div>{feature.image && <div className="feature-visual"><span className="feature-visual-fallback"><Icon name={feature.icon} size={28} /><span>{feature.signalLabel}</span></span><img src={feature.image} alt={`${feature.title} product preview`} loading="lazy" onError={(event) => { event.currentTarget.style.display = 'none' }} /></div>}<h3>{feature.title}</h3><p>{feature.body}</p><div className="feature-signal"><strong>{feature.signal}</strong><span>{feature.signalLabel}</span></div><a href="#demo" onClick={(event) => handleAnchor(event, '#demo')} aria-label={`Learn more about ${feature.title}`}><Icon name="arrow" size={18} /></a></article>)}</div></div>
         </section>
 
         <section className="section workflow-section workflow-rebuild story-section" id="solutions" data-story="think" data-chapter="03">

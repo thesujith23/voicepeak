@@ -297,3 +297,34 @@ h1 { max-width: 610px; margin-top: 32px; font-size: clamp(65px, 8.4vw, 122px); l
 @keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }@keyframes modalRise { from { opacity: 0; transform: translateY(22px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @media (max-width: 760px) { .constellation-field { inset: 7% -8% 0; }.workflow-rebuild-kicker { align-items: flex-start; gap: 12px; flex-direction: column; }.workflow-rebuild .workflow-copy { display: block; padding-top: 30px; }.workflow-rebuild .workflow-copy h2 { margin-bottom: 23px; }.workflow-rebuild .workflow-intro-side { max-width: 330px; }.workflow-rebuild .workflow-steps { display: block; padding-top: 38px; }.workflow-rebuild .workflow-step { min-height: 205px; }.workflow-rebuild .workflow-connector { width: 1px; height: 30px; margin: 0 0 0 29px; background: rgba(16,16,20,.28); }.workflow-rebuild .workflow-connector span { display: none; }.demo-modal-backdrop { padding: 12px; }.demo-modal { max-height: calc(100vh - 24px); padding: 34px 20px 24px; border-radius: 14px; }.demo-form-row { grid-template-columns: 1fr; gap: 15px; }.demo-modal h2, .demo-success h2 { font-size: 42px; }.demo-form-submit { width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .constellation-field::before, .constellation-field::after { animation: none; }.workflow-rebuild .workflow-step:hover { transform: none; }.demo-modal-backdrop, .demo-modal { animation: none; } }
+
+
+/* Preview edit: expand Features into an eight-card product map with aligned visual windows. */
+.features-section::after { content: "RANGE / 01—08"; }
+.features-section .feature-grid { grid-auto-rows: minmax(292px, auto); }
+.features-section .feature-card { min-height: 292px; padding: 22px 25px 24px; overflow: hidden; }
+.feature-meta { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.feature-label { color: #77767d; font: 9px "IBM Plex Mono", monospace; letter-spacing: .1em; line-height: 1.3; }
+.features-section .feature-card--has-image { min-height: 340px; }
+.feature-visual { height: 88px; margin: 18px -25px 0; overflow: hidden; border-top: 1px solid rgba(16,16,20,.1); border-bottom: 1px solid rgba(16,16,20,.1); background: #e5e4dc; }
+.feature-visual img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 44%; filter: saturate(.82) contrast(.96); transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .35s ease; }
+.feature-card:hover .feature-visual img { transform: scale(1.07); filter: saturate(1.08) contrast(1); }
+.features-section .feature-card h3 { margin-top: 25px; max-width: 230px; }
+.features-section .feature-card--has-image h3 { margin-top: 18px; }
+.features-section .feature-card p { width: auto; max-width: 250px; margin-bottom: 0; }
+.feature-signal { position: absolute; left: 25px; bottom: 20px; display: flex; align-items: baseline; gap: 7px; color: #77767d; }
+.feature-signal strong { color: var(--ink); font: 700 21px/1 "Manrope", sans-serif; letter-spacing: -.07em; }
+.feature-signal span { font: 9px "IBM Plex Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
+.features-section .feature-card > a { right: 24px; bottom: 21px; }
+@media (max-width: 760px) {
+  .features-section .feature-grid { grid-auto-rows: auto; }
+  .features-section .feature-card, .features-section .feature-card--has-image { min-height: 282px; }
+  .feature-visual { height: 82px; }
+  .features-section .feature-card h3, .features-section .feature-card--has-image h3 { margin-top: 21px; }
+}
+
+.feature-visual { position: relative; display: grid; place-items: center; background: radial-gradient(circle at 25% 40%, rgba(216,255,79,.8), transparent 22%), linear-gradient(125deg, #dfe3d9, #d8d2eb 52%, #e9cdbf); }
+.feature-card--has-image:nth-child(8) .feature-visual { background: radial-gradient(circle at 70% 36%, rgba(216,255,79,.86), transparent 18%), linear-gradient(125deg, #d6e2dc, #d8d1eb 52%, #e7bfb3); }
+.feature-visual-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px; color: rgba(16,16,20,.72); font: 10px "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+.feature-visual-fallback svg { width: 34px; height: 34px; padding: 7px; border: 1px solid rgba(16,16,20,.35); border-radius: 50%; }
+.feature-visual img { position: relative; z-index: 1; }
